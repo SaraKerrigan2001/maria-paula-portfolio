@@ -1,6 +1,5 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
 
 interface Message {
   id: number;
@@ -9,330 +8,298 @@ interface Message {
   timestamp: Date;
 }
 
+const quickQuestions = [
+  { label: '👩‍🍳 Experiencia', text: '¿Cuál es tu experiencia?' },
+  { label: '💻 Proyectos', text: '¿Qué proyectos has hecho?' },
+  { label: '🎓 Estudios', text: '¿Cuál es tu formación?' },
+  { label: '📍 Contacto', text: '¿Cómo te contacto?' },
+  { label: '⚡ Habilidades', text: '¿Qué habilidades tienes?' },
+  { label: '🌐 Idiomas', text: '¿Qué idiomas hablas?' },
+];
+
+const getBotResponse = (userMessage: string): string => {
+  const msg = userMessage.toLowerCase();
+
+  if (msg.includes('hola') || msg.includes('hi') || msg.includes('buenas') || msg.includes('saludos')) {
+    return '¡Hola! 👋 Soy el asistente virtual de María Paula. Puedo contarte sobre su experiencia, proyectos, estudios y más. ¿Qué te gustaría saber?';
+  }
+
+  if (msg.includes('experiencia') || msg.includes('trabajo') || msg.includes('laboral')) {
+    return '💼 María Paula tiene experiencia en:\n\n🍳 Cocinera en Restaurante El Sabor (2023–2024) — cocina tradicional y moderna, emplatado y trabajo en equipo.\n\n💻 Desarrolladora de Software Freelance (2025–Actualidad) — aplicaciones web con HTML, CSS, JavaScript, Bootstrap y Git/GitHub.';
+  }
+
+  if (msg.includes('proyecto') || msg.includes('software') || msg.includes('sena') || msg.includes('progsena') || msg.includes('digiturno')) {
+    return '🚀 Sus proyectos de software incluyen:\n\n🏆 Sistema ProgSena — Gestión académica para el SENA con PHP, MySQL y arquitectura MVC. Maneja instructores, coordinadores, asignaciones y fichas.\n\n🚦 DigiTurno APE-SENA — Sistema de turnos digitales con Laravel, Tailwind y MySQL. Pantalla pública en tiempo real.\n\n⭐ Este portafolio — Desarrollado con Next.js 16, TypeScript y Tailwind CSS.';
+  }
+
+  if (msg.includes('estudio') || msg.includes('formación') || msg.includes('educación') || msg.includes('universidad') || msg.includes('colegio')) {
+    return '🎓 Formación académica de María Paula:\n\n🏫 Bachillerato — Colegio Privado Seminario Menor San José de Cúcuta (2013–2019)\n\n🎨 Diseño Gráfico — Universidad UDES (1 año)\n\n🎵 Música y Arte — Escuela de Música y Arte (1 año)\n\n👨‍🍳 Gastronomía — Instituto Bolivariano IBES (1.5 años)';
+  }
+
+  if (msg.includes('habilidad') || msg.includes('skill') || msg.includes('sabe') || msg.includes('puede')) {
+    return '⚡ Habilidades de María Paula:\n\n🍳 Cocina Profesional — 85%\n🌐 HTML & CSS — 80%\n⚡ JavaScript — 65%\n🎨 Diseño Gráfico — 75%\n✏️ Dibujo & Pintura — 90%\n💅 Bootstrap / Tailwind — 70%\n\nTambién tiene habilidades blandas: creatividad, trabajo en equipo, liderazgo y resolución de problemas.';
+  }
+
+  if (msg.includes('contacto') || msg.includes('email') || msg.includes('teléfono') || msg.includes('correo') || msg.includes('whatsapp')) {
+    return '📬 Puedes contactar a María Paula:\n\n📧 Email: paitocapacho5@gmail.com\n📱 Teléfono: 300 641 0764\n📍 Ubicación: Cúcuta, Norte de Santander, Colombia\n🌐 Disponible para proyectos remotos\n\n¡No dudes en escribirle!';
+  }
+
+  if (msg.includes('idioma') || msg.includes('habla') || msg.includes('lengua') || msg.includes('language')) {
+    return '🌐 María Paula habla 3 idiomas:\n\n🇪🇸 Español — Nativo\n🇺🇸 Inglés — Intermedio\n🇫🇷 Francés — Básico\n\nIncluso este portafolio tiene soporte multiidioma en los 3 idiomas.';
+  }
+
+  if (msg.includes('cocina') || msg.includes('chef') || msg.includes('gastronomía') || msg.includes('comida')) {
+    return '🍳 En cocina, María Paula tiene experiencia en:\n\n• Cocina tradicional y moderna colombiana\n• Técnicas de emplatado profesional\n• Seminario de Parrilla VS Barril\n• Coctelería y mixología\n• Trabajo en equipo bajo presión\n\nEstudió gastronomía en el Instituto Bolivariano IBES.';
+  }
+
+  if (msg.includes('arte') || msg.includes('dibujo') || msg.includes('pintura') || msg.includes('diseño')) {
+    return '🎨 María Paula es también artista:\n\n✏️ Dibujo artístico — heredado de su familia, 90% de dominio\n🖌️ Pintura — diferentes técnicas y estilos\n🎨 Diseño Gráfico — estudió en la Universidad UDES\n\nCombina su creatividad artística con el desarrollo de software para crear experiencias únicas.';
+  }
+
+  if (msg.includes('disponible') || msg.includes('contratar') || msg.includes('freelance') || msg.includes('trabajo')) {
+    return '✅ María Paula está disponible para:\n\n• Proyectos de desarrollo web freelance\n• Consultoría gastronómica\n• Diseño gráfico y visual\n• Trabajo remoto o presencial en Cúcuta\n\n📧 Contáctala en: paitocapacho5@gmail.com';
+  }
+
+  if (msg.includes('quién') || msg.includes('quien') || msg.includes('sobre') || msg.includes('about') || msg.includes('presentación')) {
+    return '👩 María Paula Capacho González:\n\n• 23 años, nacida el 7 de diciembre de 2001\n• Chef y Desarrolladora de Software\n• Cúcuta, Norte de Santander, Colombia\n• Apasionada por combinar tecnología y gastronomía\n• Artista, creativa y multidisciplinar\n\n¡Una persona única con múltiples talentos! 🌟';
+  }
+
+  return '🤔 Interesante pregunta. Puedo contarte sobre la experiencia, proyectos, estudios, habilidades o contacto de María Paula. ¿Sobre qué te gustaría saber más?';
+};
+
 export default function Chatbot() {
-  const { t, currentLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: t('chat.greeting'),
+      text: '¡Hola! 👋 Soy el asistente virtual de María Paula — Chef, Desarrolladora y Artista. ¿En qué puedo ayudarte hoy?',
       isBot: true,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [pulse, setPulse] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Update greeting message when language changes
   useEffect(() => {
-    setMessages([{
-      id: 1,
-      text: t('chat.greeting'),
-      isBot: true,
-      timestamp: new Date()
-    }]);
-  }, [currentLanguage, t]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const getBotResponses = () => {
-    const responses = {
-      ES: {
-        greeting: [
-          "¡Hola! 😊 ¿Cómo estás? ¿En qué puedo ayudarte?",
-          "¡Bienvenido! 👋 Estoy aquí para ayudarte con cualquier pregunta sobre María Paula.",
-          "¡Hola! Me alegra verte por aquí. ¿Qué te gustaría saber?"
-        ],
-        experience: [
-          "María Paula tiene más de 5 años de experiencia combinando cocina profesional y desarrollo de software. 👩‍🍳💻",
-          "Su experiencia incluye trabajo en restaurantes de alta cocina y desarrollo de aplicaciones web modernas.",
-          "Ha trabajado tanto en cocinas profesionales como en equipos de desarrollo ágil."
-        ],
-        skills: [
-          "Sus habilidades incluyen: Cocina profesional, JavaScript, React, Next.js, Python, y gestión de equipos. 🚀",
-          "Domina tanto técnicas culinarias avanzadas como tecnologías web modernas.",
-          "Especializada en crear experiencias digitales y gastronómicas excepcionales."
-        ],
-        contact: [
-          "Puedes contactar a María Paula a través del formulario de contacto en esta página. 📧",
-          "También puedes encontrarla en sus redes sociales que están en la sección About.",
-          "¿Te gustaría que te ayude con algo específico sobre su trabajo?"
-        ],
-        portfolio: [
-          "Su portfolio incluye proyectos de desarrollo web, diseño gráfico y experiencias culinarias únicas. 🎨",
-          "Puedes ver algunos de sus trabajos en la sección Portfolio de esta página.",
-          "Combina creatividad técnica con innovación gastronómica."
-        ],
-        default: [
-          "Esa es una pregunta interesante. ¿Podrías ser más específico? 🤔",
-          "No estoy seguro de entender completamente. ¿Puedes reformular tu pregunta?",
-          "¡Interesante! Cuéntame más sobre lo que necesitas saber."
-        ]
-      },
-      EN: {
-        greeting: [
-          "Hello! 😊 How are you? How can I help you?",
-          "Welcome! 👋 I'm here to help you with any questions about María Paula.",
-          "Hi! Nice to see you here. What would you like to know?"
-        ],
-        experience: [
-          "María Paula has over 5 years of experience combining professional cooking and software development. 👩‍🍳💻",
-          "Her experience includes work in high-end restaurants and modern web application development.",
-          "She has worked in both professional kitchens and agile development teams."
-        ],
-        skills: [
-          "Her skills include: Professional cooking, JavaScript, React, Next.js, Python, and team management. 🚀",
-          "She masters both advanced culinary techniques and modern web technologies.",
-          "Specialized in creating exceptional digital and gastronomic experiences."
-        ],
-        contact: [
-          "You can contact María Paula through the contact form on this page. 📧",
-          "You can also find her on social media in the About section.",
-          "Would you like me to help you with something specific about her work?"
-        ],
-        portfolio: [
-          "Her portfolio includes web development projects, graphic design, and unique culinary experiences. 🎨",
-          "You can see some of her work in the Portfolio section of this page.",
-          "She combines technical creativity with gastronomic innovation."
-        ],
-        default: [
-          "That's an interesting question. Could you be more specific? 🤔",
-          "I'm not sure I understand completely. Can you rephrase your question?",
-          "Interesting! Tell me more about what you need to know."
-        ]
-      },
-      FR: {
-        greeting: [
-          "Bonjour! 😊 Comment allez-vous? Comment puis-je vous aider?",
-          "Bienvenue! 👋 Je suis là pour vous aider avec toute question sur María Paula.",
-          "Salut! Ravi de vous voir ici. Que souhaiteriez-vous savoir?"
-        ],
-        experience: [
-          "María Paula a plus de 5 ans d'expérience combinant cuisine professionnelle et développement logiciel. 👩‍🍳💻",
-          "Son expérience inclut le travail dans des restaurants haut de gamme et le développement d'applications web modernes.",
-          "Elle a travaillé dans des cuisines professionnelles et des équipes de développement agile."
-        ],
-        skills: [
-          "Ses compétences incluent: Cuisine professionnelle, JavaScript, React, Next.js, Python, et gestion d'équipe. 🚀",
-          "Elle maîtrise les techniques culinaires avancées et les technologies web modernes.",
-          "Spécialisée dans la création d'expériences digitales et gastronomiques exceptionnelles."
-        ],
-        contact: [
-          "Vous pouvez contacter María Paula via le formulaire de contact sur cette page. 📧",
-          "Vous pouvez aussi la trouver sur les réseaux sociaux dans la section À propos.",
-          "Souhaiteriez-vous que je vous aide avec quelque chose de spécifique sur son travail?"
-        ],
-        portfolio: [
-          "Son portfolio inclut des projets de développement web, design graphique et expériences culinaires uniques. 🎨",
-          "Vous pouvez voir certains de ses travaux dans la section Portfolio de cette page.",
-          "Elle combine créativité technique avec innovation gastronomique."
-        ],
-        default: [
-          "C'est une question intéressante. Pourriez-vous être plus spécifique? 🤔",
-          "Je ne suis pas sûr de comprendre complètement. Pouvez-vous reformuler votre question?",
-          "Intéressant! Dites-moi en plus sur ce que vous voulez savoir."
-        ]
-      }
-    };
-    return responses[currentLanguage];
-  };
+  // Pulse the button every few seconds when closed
+  useEffect(() => {
+    if (isOpen) return;
+    const t = setInterval(() => {
+      setPulse(false);
+      setTimeout(() => setPulse(true), 300);
+    }, 5000);
+    return () => clearInterval(t);
+  }, [isOpen]);
 
-  const getRandomResponse = (category: string) => {
-    const responses = getBotResponses();
-    const categoryResponses = responses[category as keyof typeof responses];
-    return categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
-  };
+  const sendMessage = (text: string) => {
+    if (!text.trim()) return;
 
-  const getBotResponse = (userMessage: string): string => {
-    const message = userMessage.toLowerCase();
-    
-    if (message.includes('hola') || message.includes('hi') || message.includes('hello') || message.includes('bonjour') || message.includes('salut')) {
-      return getRandomResponse('greeting');
-    }
-    if (message.includes('experiencia') || message.includes('trabajo') || message.includes('experience') || message.includes('work') || message.includes('expérience') || message.includes('travail')) {
-      return getRandomResponse('experience');
-    }
-    if (message.includes('habilidades') || message.includes('skills') || message.includes('tecnologías') || message.includes('compétences') || message.includes('technologies')) {
-      return getRandomResponse('skills');
-    }
-    if (message.includes('contacto') || message.includes('contact') || message.includes('email')) {
-      return getRandomResponse('contact');
-    }
-    if (message.includes('portfolio') || message.includes('proyectos') || message.includes('trabajos') || message.includes('projets') || message.includes('travaux')) {
-      return getRandomResponse('portfolio');
-    }
-    
-    return getRandomResponse('default');
-  };
-
-  const handleSendMessage = async () => {
-    if (!inputText.trim()) return;
-
-    const userMessage: Message = {
-      id: messages.length + 1,
-      text: inputText,
-      isBot: false,
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
+    const userMsg: Message = { id: Date.now(), text, isBot: false, timestamp: new Date() };
+    setMessages(prev => [...prev, userMsg]);
     setInputText('');
     setIsTyping(true);
 
-    // Simulate bot typing delay
     setTimeout(() => {
-      const botResponse: Message = {
-        id: messages.length + 2,
-        text: getBotResponse(inputText),
+      const botMsg: Message = {
+        id: Date.now() + 1,
+        text: getBotResponse(text),
         isBot: true,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
-      
-      setMessages(prev => [...prev, botResponse]);
+      setMessages(prev => [...prev, botMsg]);
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+    }, 800 + Math.random() * 700);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
+  const handleKey = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(inputText); }
   };
-
-  const quickQuestions = [
-    t('chat.experience'),
-    t('chat.skills'),
-    t('chat.contact'),
-    t('chat.portfolio')
-  ];
 
   return (
     <>
-      {/* Chat Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full neon-button flex items-center justify-center shadow-2xl transition-all duration-300 ${
-          isOpen ? 'rotate-45' : 'pulse-glow'
-        }`}
-      >
-        {isOpen ? (
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
+      {/* Floating button */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        {!isOpen && (
+          <div
+            className="text-xs px-3 py-1.5 rounded-full font-medium animate-bounce"
+            style={{ background: 'rgba(0,212,255,0.15)', color: '#00d4ff', border: '1px solid rgba(0,212,255,0.3)' }}
+          >
+            ¡Hola! ¿Puedo ayudarte?
+          </div>
         )}
-      </button>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 ${pulse && !isOpen ? 'scale-110' : 'scale-100'}`}
+          style={{
+            background: 'linear-gradient(135deg, #0080ff, #00d4ff)',
+            boxShadow: '0 0 20px rgba(0,212,255,0.4)',
+          }}
+        >
+          {isOpen ? (
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          )}
+        </button>
+      </div>
 
-      {/* Chat Window */}
+      {/* Chat window */}
       {isOpen && (
-        <div className={`fixed z-40 modern-container rounded-2xl flex flex-col overflow-hidden chatbot-container ${
-          typeof window !== 'undefined' && window.innerWidth < 768 
-            ? 'chatbot-mobile' 
-            : 'bottom-24 right-6 w-96 h-[500px]'
-        }`}>
+        <div
+          className="fixed z-40 flex flex-col rounded-2xl overflow-hidden"
+          style={{
+            bottom: '5.5rem',
+            right: '1.5rem',
+            width: 'min(380px, calc(100vw - 2rem))',
+            height: 'min(560px, 75vh)',
+            background: 'rgba(10, 14, 26, 0.97)',
+            border: '1px solid rgba(0,212,255,0.2)',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.1)',
+            backdropFilter: 'blur(20px)',
+          }}
+        >
           {/* Header */}
-          <div className="glass-effect p-4 border-b border-cyan-400/20">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center">
-                <span className="text-black font-bold">MP</span>
-              </div>
-              <div>
-                <h3 className="font-bold text-white">{t('chat.title')}</h3>
-                <p className="text-xs text-cyan-400">{t('chat.subtitle')}</p>
-              </div>
-              <div className="ml-auto flex items-center gap-1">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-xs text-green-400">{t('chat.online')}</span>
-              </div>
+          <div
+            className="flex items-center gap-3 px-4 py-3 flex-shrink-0"
+            style={{ background: 'linear-gradient(135deg, rgba(0,128,255,0.3), rgba(0,212,255,0.2))', borderBottom: '1px solid rgba(0,212,255,0.15)' }}
+          >
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0"
+              style={{ background: 'linear-gradient(135deg, #0080ff, #00d4ff)', color: 'white' }}
+            >
+              MP
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white font-bold text-sm">Asistente Virtual</p>
+              <p className="text-xs" style={{ color: '#00d4ff' }}>María Paula Bot</p>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-xs text-green-400">En línea</span>
             </div>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 chat-messages">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex message-animation ${message.isBot ? 'justify-start' : 'justify-end'}`}
-              >
+          <div className="flex-1 overflow-y-auto p-4 space-y-3" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(0,212,255,0.3) transparent' }}>
+            {messages.map((msg) => (
+              <div key={msg.id} className={`flex message-animation ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
+                {msg.isBot && (
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mr-2 flex-shrink-0 mt-1"
+                    style={{ background: 'linear-gradient(135deg, #0080ff, #00d4ff)', color: 'white' }}
+                  >
+                    MP
+                  </div>
+                )}
                 <div
-                  className={`max-w-[80%] p-3 rounded-2xl ${
-                    message.isBot
-                      ? 'glass-effect text-white'
-                      : 'bg-gradient-to-r from-cyan-400 to-blue-500 text-black'
-                  }`}
+                  className="max-w-[78%] px-3 py-2.5 rounded-2xl"
+                  style={msg.isBot ? {
+                    background: 'rgba(255,255,255,0.07)',
+                    border: '1px solid rgba(0,212,255,0.15)',
+                    color: '#e2e8f0',
+                  } : {
+                    background: 'linear-gradient(135deg, #0080ff, #00d4ff)',
+                    color: 'white',
+                  }}
                 >
-                  <p className="text-sm">{message.text}</p>
-                  <p className={`text-xs mt-1 ${message.isBot ? 'text-gray-400' : 'text-black/70'}`}>
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  <p className="text-xs leading-relaxed whitespace-pre-line">{msg.text}</p>
+                  <p className="text-right mt-1" style={{ fontSize: '0.6rem', opacity: 0.5 }}>
+                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
               </div>
             ))}
-            
+
             {isTyping && (
               <div className="flex justify-start message-animation">
-                <div className="glass-effect p-3 rounded-2xl">
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  </div>
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mr-2 flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #0080ff, #00d4ff)', color: 'white' }}
+                >
+                  MP
+                </div>
+                <div
+                  className="px-4 py-3 rounded-2xl flex items-center gap-1"
+                  style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(0,212,255,0.15)' }}
+                >
+                  {[0, 0.15, 0.3].map((delay, i) => (
+                    <div
+                      key={i}
+                      className="w-2 h-2 rounded-full animate-bounce"
+                      style={{ background: '#00d4ff', animationDelay: `${delay}s` }}
+                    />
+                  ))}
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Questions */}
-          {messages.length === 1 && (
-            <div className="p-4 border-t border-cyan-400/20">
-              <p className="text-xs text-gray-400 mb-2">{t('chat.quick')}</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {quickQuestions.map((question, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setInputText(question)}
-                    className="text-xs glass-effect p-2 rounded-lg hover:bg-cyan-400/10 transition-colors text-left"
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
+          {/* Quick questions */}
+          <div className="px-3 py-2 flex-shrink-0" style={{ borderTop: '1px solid rgba(0,212,255,0.1)' }}>
+            <p className="text-xs mb-2" style={{ color: 'rgba(0,212,255,0.6)' }}>Preguntas rápidas:</p>
+            <div className="flex flex-wrap gap-1.5">
+              {quickQuestions.map((q) => (
+                <button
+                  key={q.label}
+                  onClick={() => sendMessage(q.text)}
+                  className="text-xs px-2.5 py-1 rounded-full transition-all hover:scale-105"
+                  style={{
+                    background: 'rgba(0,212,255,0.08)',
+                    border: '1px solid rgba(0,212,255,0.2)',
+                    color: '#94a3b8',
+                  }}
+                  onMouseEnter={e => {
+                    (e.target as HTMLElement).style.background = 'rgba(0,212,255,0.2)';
+                    (e.target as HTMLElement).style.color = '#00d4ff';
+                  }}
+                  onMouseLeave={e => {
+                    (e.target as HTMLElement).style.background = 'rgba(0,212,255,0.08)';
+                    (e.target as HTMLElement).style.color = '#94a3b8';
+                  }}
+                >
+                  {q.label}
+                </button>
+              ))}
             </div>
-          )}
+          </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-cyan-400/20">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder={t('chat.placeholder')}
-                className="flex-1 glass-effect px-4 py-2 rounded-lg text-white placeholder-gray-400 outline-none focus:border-cyan-400 transition-all text-sm"
-              />
-              <button
-                onClick={handleSendMessage}
-                disabled={!inputText.trim()}
-                className="w-10 h-10 neon-button rounded-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-              </button>
-            </div>
+          <div className="px-3 py-3 flex gap-2 flex-shrink-0" style={{ borderTop: '1px solid rgba(0,212,255,0.1)' }}>
+            <input
+              type="text"
+              value={inputText}
+              onChange={e => setInputText(e.target.value)}
+              onKeyDown={handleKey}
+              placeholder="Escribe tu mensaje..."
+              className="flex-1 text-xs px-3 py-2.5 rounded-xl outline-none"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(0,212,255,0.2)',
+                color: '#e2e8f0',
+              }}
+              onFocus={e => (e.target.style.borderColor = 'rgba(0,212,255,0.5)')}
+              onBlur={e => (e.target.style.borderColor = 'rgba(0,212,255,0.2)')}
+            />
+            <button
+              onClick={() => sendMessage(inputText)}
+              disabled={!inputText.trim()}
+              className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-30"
+              style={{ background: 'linear-gradient(135deg, #0080ff, #00d4ff)' }}
+            >
+              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
           </div>
         </div>
       )}

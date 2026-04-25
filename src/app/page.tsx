@@ -1,47 +1,35 @@
 'use client';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Portfolio from '../components/Portfolio';
+import SideNav from '../components/SideNav';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import SkillsSection from '../components/SkillsSection';
+import ExperienceSection from '../components/ExperienceSection';
+import PortfolioSection from '../components/PortfolioSection';
+import ContactSection from '../components/ContactSection';
 import Chatbot from '../components/Chatbot';
-import { useLanguage } from '../contexts/LanguageContext';
+import IntroAnimation from '../components/IntroAnimation';
+import Background3D from '../components/Background3D';
 
 export default function Home() {
-  const { t } = useLanguage();
-
   return (
-    <main className="min-h-screen bg-gradient-hero">
-      <Navbar />
-      <Hero />
-      <About />
-      <Portfolio />
-      
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-black uppercase tracking-wider gradient-text mb-8">
-            {t('contact.title')}
-          </h2>
-          <p className="text-gray-300 text-lg mb-8">
-            {t('contact.description')}
-          </p>
-          <button className="neon-button">
-            {t('contact.send')}
-          </button>
-        </div>
-      </section>
+    <main style={{ background: '#0a0e1a', minHeight: '100vh', position: 'relative' }}>
+      {/* 3D background — always visible */}
+      <Background3D />
 
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t border-cyan-400/20">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400">
-            {t('footer.rights')}
-          </p>
-        </div>
-      </footer>
+      {/* Intro animation — only on load */}
+      <IntroAnimation />
 
-      {/* Chatbot */}
-      <Chatbot />
+      {/* Content — above 3D background */}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <SideNav />
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <PortfolioSection />
+        <ContactSection />
+        <Chatbot />
+      </div>
     </main>
   );
 }

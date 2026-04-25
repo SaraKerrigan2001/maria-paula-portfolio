@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <body style={{ background: '#0a0e1a', margin: 0, padding: 0 }}>
         <LanguageProvider>
           {children}
         </LanguageProvider>

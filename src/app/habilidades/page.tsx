@@ -98,7 +98,7 @@ export default function Habilidades() {
         </div>
 
         <footer className="text-center py-6 mt-8 border-t border-slate-700">
-          <p>&copy; 2025 María Paula Capacho González</p>
+          <p>&copy; 2026 María Paula Capacho González</p>
         </footer>
       </div>
     </div>

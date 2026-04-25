@@ -22,14 +22,36 @@ const translations = {
     'nav.title': 'MARÍA PAULA',
     'nav.subtitle': 'CHEF & SOFTWARE DEVELOPER',
     
-    // Hero
-    'hero.designer': 'GRAPHIC DESIGNER',
-    'hero.name': 'MARÍA PAULA',
-    'hero.subtitle': 'SOFTWARE DEVELOPER & CHEF',
-    'hero.description': 'Diseños que conectan, involucran y elevan tu marca con plantillas creativas para impulsar el éxito de tu negocio.',
-    'hero.placeholder': 'Usuario o Email',
-    'hero.login': 'LOGIN',
-    'hero.forgot': '¿Olvidaste tu contraseña?',
+    // Hero Cards
+    'hero.name': 'María Paula',
+    'hero.system.title': 'SISTEMA DE PORTAFOLIO PROFESIONAL',
+    'hero.profile.title': 'CHEF & DESARROLLADORA DE SOFTWARE',
+    
+    // Left Card Features
+    'hero.experience.title': 'Experiencia Avanzada',
+    'hero.experience.desc': 'Desarrollo y cocina profesional',
+    'hero.management.title': 'Gestión Completa',
+    'hero.management.desc': 'Proyectos y experiencias',
+    'hero.realtime.title': 'Tiempo Real',
+    'hero.realtime.desc': 'Información actualizada al instante',
+    
+    // Right Card Contact
+    'hero.email.title': 'Email Profesional',
+    'hero.email.value': 'maria.paula@portfolio.com',
+    'hero.phone.title': 'Teléfono de Contacto',
+    'hero.phone.value': '+57 300 123 4567',
+    'hero.location.title': 'Ubicación',
+    'hero.location.value': 'Colombia, Disponible Remoto',
+    
+    // Stats
+    'hero.years': 'Años',
+    'hero.projects': 'Proyectos',
+    'hero.languages': 'Idiomas',
+    'hero.satisfaction': 'Satisfacción',
+    
+    // Buttons
+    'hero.access.portfolio': 'ACCEDER AL PORTAFOLIO',
+    'hero.view.complete': 'VER PORTAFOLIO COMPLETO',
     
     // About
     'about.greeting': '¡Hola!',
@@ -40,30 +62,13 @@ const translations = {
     'about.follow': 'SÍGUEME',
     'about.handle': '@MARIAPAULACH',
     
-    // Portfolio
-    'portfolio.title': 'COMMISSION | TOP ICON',
-    'portfolio.yasmin': 'YASMIN BANDEJA',
-    'portfolio.yasmin.subtitle': 'Chef Profesional',
-    'portfolio.mikko': 'MIKKO MAGADIA',
-    'portfolio.mikko.subtitle': 'Desarrolladora de Software',
-    'portfolio.angelica': 'ANGELICA CALAYAN',
-    'portfolio.angelica.subtitle': 'Diseñadora Gráfica',
-    'portfolio.culinary': 'CULINARIO',
-    'portfolio.tech': 'TECNOLOGÍA',
-    'portfolio.design': 'DISEÑO',
-    'portfolio.posters': 'POSTERS',
-    'portfolio.invitations': 'INVITACIONES',
-    'portfolio.banners': 'BANNERS',
-    'portfolio.logo': 'LOGO',
-    'portfolio.photography': 'FOTOGRAFÍA',
-    
     // Contact
     'contact.title': 'Contacto',
     'contact.description': '¿Interesado en trabajar juntos? ¡Hablemos!',
     'contact.send': 'ENVIAR MENSAJE',
     
     // Footer
-    'footer.rights': '© 2024 María Paula Capacho González. Todos los derechos reservados.',
+    'footer.rights': '© 2026 María Paula Capacho González. Todos los derechos reservados.',
     
     // Chatbot
     'chat.title': 'Asistente Virtual',
@@ -75,7 +80,15 @@ const translations = {
     'chat.skills': '¿Qué habilidades tiene?',
     'chat.contact': '¿Cómo contactarla?',
     'chat.portfolio': 'Ver portfolio',
-    'chat.greeting': '¡Hola! 👋 Soy el asistente virtual de María Paula. ¿En qué puedo ayudarte hoy?'
+    'chat.projects': '¿Qué proyectos ha hecho?',
+    'chat.education': '¿Cuál es su formación?',
+    'chat.services': '¿Qué servicios ofrece?',
+    'chat.availability': '¿Está disponible?',
+    'chat.rates': '¿Cuáles son sus tarifas?',
+    'chat.location': '¿Dónde está ubicada?',
+    'chat.greeting': '¡Hola! 👋 Soy el asistente virtual de María Paula. ¿En qué puedo ayudarte hoy?',
+    'chat.welcome': '¡Bienvenido/a! 🌟 Estoy aquí para responder tus preguntas sobre María Paula, Chef y Desarrolladora con +5 años de experiencia. ¿Qué te gustaría saber?',
+    'chat.tooltip': '¡Hola! ¿Puedo ayudarte?'
   },
   
   EN: {
@@ -88,14 +101,36 @@ const translations = {
     'nav.title': 'MARÍA PAULA',
     'nav.subtitle': 'CHEF & SOFTWARE DEVELOPER',
     
-    // Hero
-    'hero.designer': 'GRAPHIC DESIGNER',
-    'hero.name': 'MARÍA PAULA',
-    'hero.subtitle': 'SOFTWARE DEVELOPER & CHEF',
-    'hero.description': 'Designs that connect, engage, and elevate your brand with creative templates to boost your business success.',
-    'hero.placeholder': 'Username or Email',
-    'hero.login': 'LOGIN',
-    'hero.forgot': 'Forgot password?',
+    // Hero Cards
+    'hero.name': 'María Paula',
+    'hero.system.title': 'PROFESSIONAL PORTFOLIO SYSTEM',
+    'hero.profile.title': 'CHEF & SOFTWARE DEVELOPER',
+    
+    // Left Card Features
+    'hero.experience.title': 'Advanced Experience',
+    'hero.experience.desc': 'Professional development and cooking',
+    'hero.management.title': 'Complete Management',
+    'hero.management.desc': 'Projects and experiences',
+    'hero.realtime.title': 'Real Time',
+    'hero.realtime.desc': 'Information updated instantly',
+    
+    // Right Card Contact
+    'hero.email.title': 'Professional Email',
+    'hero.email.value': 'maria.paula@portfolio.com',
+    'hero.phone.title': 'Contact Phone',
+    'hero.phone.value': '+57 300 123 4567',
+    'hero.location.title': 'Location',
+    'hero.location.value': 'Colombia, Remote Available',
+    
+    // Stats
+    'hero.years': 'Years',
+    'hero.projects': 'Projects',
+    'hero.languages': 'Languages',
+    'hero.satisfaction': 'Satisfaction',
+    
+    // Buttons
+    'hero.access.portfolio': 'ACCESS PORTFOLIO',
+    'hero.view.complete': 'VIEW COMPLETE PORTFOLIO',
     
     // About
     'about.greeting': 'Hi there!',
@@ -105,23 +140,6 @@ const translations = {
     'about.readmore': 'READ MORE',
     'about.follow': 'FOLLOW ME',
     'about.handle': '@MARIAPAULACH',
-    
-    // Portfolio
-    'portfolio.title': 'COMMISSION | TOP ICON',
-    'portfolio.yasmin': 'YASMIN BANDEJA',
-    'portfolio.yasmin.subtitle': 'Professional Chef',
-    'portfolio.mikko': 'MIKKO MAGADIA',
-    'portfolio.mikko.subtitle': 'Software Developer',
-    'portfolio.angelica': 'ANGELICA CALAYAN',
-    'portfolio.angelica.subtitle': 'Graphic Designer',
-    'portfolio.culinary': 'CULINARY',
-    'portfolio.tech': 'TECH',
-    'portfolio.design': 'DESIGN',
-    'portfolio.posters': 'POSTERS',
-    'portfolio.invitations': 'INVITATIONS',
-    'portfolio.banners': 'BANNERS',
-    'portfolio.logo': 'LOGO',
-    'portfolio.photography': 'PHOTOGRAPHY',
     
     // Contact
     'contact.title': 'Contact',
@@ -141,7 +159,15 @@ const translations = {
     'chat.skills': 'What skills does she have?',
     'chat.contact': 'How to contact her?',
     'chat.portfolio': 'View portfolio',
-    'chat.greeting': 'Hello! 👋 I\'m María Paula\'s virtual assistant. How can I help you today?'
+    'chat.projects': 'What projects has she done?',
+    'chat.education': 'What is her education?',
+    'chat.services': 'What services does she offer?',
+    'chat.availability': 'Is she available?',
+    'chat.rates': 'What are her rates?',
+    'chat.location': 'Where is she located?',
+    'chat.greeting': 'Hello! 👋 I\'m María Paula\'s virtual assistant. How can I help you today?',
+    'chat.welcome': 'Welcome! 🌟 I\'m here to answer your questions about María Paula, Chef and Developer with +5 years of experience. What would you like to know?',
+    'chat.tooltip': 'Hello! Can I help you?'
   },
   
   FR: {
@@ -154,14 +180,36 @@ const translations = {
     'nav.title': 'MARÍA PAULA',
     'nav.subtitle': 'CHEF & DÉVELOPPEUSE LOGICIEL',
     
-    // Hero
-    'hero.designer': 'DESIGNER GRAPHIQUE',
-    'hero.name': 'MARÍA PAULA',
-    'hero.subtitle': 'DÉVELOPPEUSE LOGICIEL & CHEF',
-    'hero.description': 'Des designs qui connectent, engagent et élèvent votre marque avec des modèles créatifs pour stimuler le succès de votre entreprise.',
-    'hero.placeholder': 'Nom d\'utilisateur ou Email',
-    'hero.login': 'CONNEXION',
-    'hero.forgot': 'Mot de passe oublié?',
+    // Hero Cards
+    'hero.name': 'María Paula',
+    'hero.system.title': 'SYSTÈME DE PORTFOLIO PROFESSIONNEL',
+    'hero.profile.title': 'CHEF & DÉVELOPPEUSE LOGICIEL',
+    
+    // Left Card Features
+    'hero.experience.title': 'Expérience Avancée',
+    'hero.experience.desc': 'Développement et cuisine professionnels',
+    'hero.management.title': 'Gestion Complète',
+    'hero.management.desc': 'Projets et expériences',
+    'hero.realtime.title': 'Temps Réel',
+    'hero.realtime.desc': 'Informations mises à jour instantanément',
+    
+    // Right Card Contact
+    'hero.email.title': 'Email Professionnel',
+    'hero.email.value': 'maria.paula@portfolio.com',
+    'hero.phone.title': 'Téléphone de Contact',
+    'hero.phone.value': '+57 300 123 4567',
+    'hero.location.title': 'Localisation',
+    'hero.location.value': 'Colombie, Disponible à Distance',
+    
+    // Stats
+    'hero.years': 'Années',
+    'hero.projects': 'Projets',
+    'hero.languages': 'Langues',
+    'hero.satisfaction': 'Satisfaction',
+    
+    // Buttons
+    'hero.access.portfolio': 'ACCÉDER AU PORTFOLIO',
+    'hero.view.complete': 'VOIR PORTFOLIO COMPLET',
     
     // About
     'about.greeting': 'Salut!',
@@ -171,23 +219,6 @@ const translations = {
     'about.readmore': 'LIRE PLUS',
     'about.follow': 'SUIVEZ-MOI',
     'about.handle': '@MARIAPAULACH',
-    
-    // Portfolio
-    'portfolio.title': 'COMMISSION | ICÔNE TOP',
-    'portfolio.yasmin': 'YASMIN BANDEJA',
-    'portfolio.yasmin.subtitle': 'Chef Professionnelle',
-    'portfolio.mikko': 'MIKKO MAGADIA',
-    'portfolio.mikko.subtitle': 'Développeuse Logiciel',
-    'portfolio.angelica': 'ANGELICA CALAYAN',
-    'portfolio.angelica.subtitle': 'Designer Graphique',
-    'portfolio.culinary': 'CULINAIRE',
-    'portfolio.tech': 'TECH',
-    'portfolio.design': 'DESIGN',
-    'portfolio.posters': 'AFFICHES',
-    'portfolio.invitations': 'INVITATIONS',
-    'portfolio.banners': 'BANNIÈRES',
-    'portfolio.logo': 'LOGO',
-    'portfolio.photography': 'PHOTOGRAPHIE',
     
     // Contact
     'contact.title': 'Contact',
@@ -207,7 +238,15 @@ const translations = {
     'chat.skills': 'Quelles compétences a-t-elle?',
     'chat.contact': 'Comment la contacter?',
     'chat.portfolio': 'Voir portfolio',
-    'chat.greeting': 'Bonjour! 👋 Je suis l\'assistant virtuel de María Paula. Comment puis-je vous aider aujourd\'hui?'
+    'chat.projects': 'Quels projets a-t-elle réalisés?',
+    'chat.education': 'Quelle est sa formation?',
+    'chat.services': 'Quels services offre-t-elle?',
+    'chat.availability': 'Est-elle disponible?',
+    'chat.rates': 'Quels sont ses tarifs?',
+    'chat.location': 'Où est-elle située?',
+    'chat.greeting': 'Bonjour! 👋 Je suis l\'assistant virtuel de María Paula. Comment puis-je vous aider aujourd\'hui?',
+    'chat.welcome': 'Bienvenue! 🌟 Je suis là pour répondre à vos questions sur María Paula, Chef et Développeuse avec +5 ans d\'expérience. Que souhaitez-vous savoir?',
+    'chat.tooltip': 'Bonjour! Puis-je vous aider?'
   }
 };
 
