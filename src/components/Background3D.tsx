@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import type * as THREE_TYPES from 'three';
 
 export default function Background3D() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -33,9 +34,9 @@ export default function Background3D() {
       scene.add(pLight2);
 
       /* ── Floating geometric shapes ── */
-      const shapes: THREE.Mesh[] = [];
+      const shapes: THREE_TYPES.Mesh[] = [];
 
-      const addShape = (geo: THREE.BufferGeometry, color: number, x: number, y: number, z: number) => {
+      const addShape = (geo: THREE_TYPES.BufferGeometry, color: number, x: number, y: number, z: number) => {
         const mat = new THREE.MeshStandardMaterial({
           color, roughness: 0.3, metalness: 0.7,
           transparent: true, opacity: 0.15,
