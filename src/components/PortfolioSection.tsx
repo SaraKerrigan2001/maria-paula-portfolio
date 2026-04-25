@@ -100,24 +100,24 @@ export default function PortfolioSection() {
           <h2 className="section-title">
             Mi <span>Portafolio</span>
           </h2>
-          <p className="text-gray-400 mt-2">Una colección de mis proyectos y trabajos recientes</p>
-        </div>
+          <p style={{ color: '#94a3b8', marginTop: 12, marginBottom: 32 }}>Una colección de mis proyectos y trabajos recientes</p>
 
-        {/* Filter tabs */}
-        <div className="flex gap-2 justify-center flex-wrap mb-8">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                activeCategory === cat
-                  ? 'bg-cyan-500 text-black'
-                  : 'dark-card text-gray-400 hover:text-white'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {/* Filter tabs */}
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginTop: 24, marginBottom: 8 }}>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                  activeCategory === cat
+                    ? 'bg-cyan-500 text-black'
+                    : 'dark-card text-gray-400 hover:text-white'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Grid */}

@@ -69,7 +69,7 @@ export default function ExperienceSection() {
         <div className="grid md:grid-cols-2 gap-10">
 
           {/* ── Experiencia Laboral ── */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <h3 className="text-white font-bold text-lg flex items-center gap-2">
               <span className="glow-cyan">💼</span> Experiencia Laboral
             </h3>
@@ -77,7 +77,8 @@ export default function ExperienceSection() {
             {experiences.map((exp, i) => (
               <div
                 key={i}
-                className="dark-card p-5 rounded-xl flex items-start gap-4"
+                className="dark-card rounded-xl flex items-start gap-4"
+                style={{ padding: '20px', marginBottom: 20, border: `1px solid ${exp.color}33` }}
               >
                 {/* Icon */}
                 <div
@@ -110,7 +111,7 @@ export default function ExperienceSection() {
           </div>
 
           {/* ── Formación Académica ── */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             <h3 className="text-white font-bold text-lg flex items-center gap-2">
               <span className="glow-cyan">🎓</span> Formación Académica
             </h3>
@@ -118,7 +119,8 @@ export default function ExperienceSection() {
             {education.map((edu, i) => (
               <div
                 key={i}
-                className="dark-card p-5 rounded-xl flex items-center gap-4"
+                className="dark-card rounded-xl flex items-center gap-4"
+                style={{ padding: '16px 20px', marginBottom: 16, border: `1px solid ${edu.color}33` }}
               >
                 {/* Icon */}
                 <div
