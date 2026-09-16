@@ -104,9 +104,9 @@ Para personalizar el contenido:
 
 **María Paula Capacho González**
 - Chef Profesional & Desarrolladora de Software
-- Email: [tu-email@ejemplo.com]
-- LinkedIn: [tu-perfil-linkedin]
-- GitHub: [tu-perfil-github]
+- Email: mariapaulacapachogonzalez@gmail.com
+- LinkedIn: https://www.linkedin.com/in/maria-paula-capacho-gonzalez-189849342/?skipRedirect=true&contentTrackingId=41FO5G4rTuGS7O%2FGSNs9Fw%3D%3D&viewName=premium-nav-upsell-text&upsellOrderOrigin=Tracking%3Av1%3Apremium_nav_upsell_text%3ANav%3AIn-Product
+- GitHub: https://github.com/SaraKerrigan2001
 
 ---
 
